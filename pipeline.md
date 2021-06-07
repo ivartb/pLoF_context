@@ -2,7 +2,7 @@
 
 1. Select nonsense mutations from gnomAD database  
 ```python3 ptvSelection.py <input.vcf> <output.tsv>```  
-```input.vcf``` – gnomAD variant dataset in VCF format ([file](https://storage.googleapis.com/gcp-public-data--gnomad/release/2.1.1/liftover_grch38/vcf/exomes/gnomad.exomes.r2.1.1.sites.liftover_grch38.vcf.bgz))
+```input.vcf``` – gnomAD variant dataset in VCF format ([file](https://storage.googleapis.com/gcp-public-data--gnomad/release/2.1.1/liftover_grch38/vcf/exomes/gnomad.exomes.r2.1.1.sites.liftover_grch38.vcf.bgz))  
 ```output.tsv``` – file to write output info about nonsense mutations in tab-separated format
  
 1. Extract local context around selected nonsense mutations  
