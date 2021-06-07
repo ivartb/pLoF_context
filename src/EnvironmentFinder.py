@@ -27,7 +27,6 @@ for i, line in snp.iterrows():
     name = line['#CHROM']
     pos = line['POS']
     enst = line['ENST']
-    #print(name, pos, enst)
 
     # select only highly conservative transcipts
     if enst not in conserv:
@@ -41,8 +40,7 @@ for i, line in snp.iterrows():
         if enst in f.attributes['ID'][0]:
             ind = f.attributes['ID'][0]
             shift = int(f.frame)
-            #print(f)
-            #print(f.frame)
+
             prev = False
             fol = False
             prev_i = 0
@@ -56,10 +54,6 @@ for i, line in snp.iterrows():
             begin = cur_pos - (cur_pos - shift) % 3 - window * 3
             end = cur_pos + (2-(cur_pos - shift) % 3) + window * 3
 
-            #print(f.start, pos, f.end)
-            #print(cur_start, cur_pos, cur_end)
-            #print(begin, end)
-
             if begin < cur_start:
                 prev = True
                 prev_i = cur_start - begin
@@ -72,8 +66,6 @@ for i, line in snp.iterrows():
 
 
             seq = f.sequence(ref)
-            #print(seq, len(seq))
-            #print(seq[begin:end+1], len(seq[begin:end+1]), prev, prev_i, fol, fol_i)
             ans += seq[begin:end+1]
 
             f_cur = f
@@ -84,7 +76,6 @@ for i, line in snp.iterrows():
                     base_ind = f_cur.id
                     cur_ind = 0
                 prev_ind = int(cur_ind) - 1
-                #print(base_ind, prev_ind)
                 try:
                     f_cur = db[base_ind + ("_" + str(prev_ind) if prev_ind != 0 else "")]
                 except gffutils.exceptions.FeatureNotFoundError:
@@ -98,11 +89,6 @@ for i, line in snp.iterrows():
                 begin = cur_pos - prev_i + 1
                 end = cur_end
 
-                #print("prev")
-                #print(f.start, pos, f.end)
-                #print(cur_start, cur_pos, cur_end)
-                #print(begin, end)
-
                 if begin < cur_start:
                     prev = True
                     prev_i = cur_start - begin
@@ -111,8 +97,6 @@ for i, line in snp.iterrows():
                     prev = False
 
                 seq = f_cur.sequence(ref)
-                #print(seq)
-                #print(seq[begin:end+1])
                 ans = seq[begin:end+1] + ans
 
             f_cur = f
@@ -123,7 +107,6 @@ for i, line in snp.iterrows():
                     base_ind = f_cur.id
                     cur_ind = 0
                 next_ind = int(cur_ind) + 1
-                #print(base_ind, next_ind)
                 try:
                     f_cur = db[base_ind + "_" + str(next_ind)]
                 except gffutils.exceptions.FeatureNotFoundError:
@@ -137,11 +120,6 @@ for i, line in snp.iterrows():
                 begin = cur_pos
                 end = cur_pos + fol_i - 1
 
-                #print("fol")
-                #print(f.start, pos, f.end)
-                #print(cur_start, cur_pos, cur_end)
-                #print(begin, end)
-
                 if end > cur_end:
                     fol = True
                     fol_i = end - cur_end
@@ -150,11 +128,8 @@ for i, line in snp.iterrows():
                     fol = False
 
                 seq = f_cur.sequence(ref)
-                #print(seq)
-                #print(seq[begin:end+1])
                 ans = ans + seq[begin:end+1]
 
-            #print("ans", ans, len(ans))
             if len(ans) != 3*(2*window+1):
                 continue
             for i in range(2*window+1):

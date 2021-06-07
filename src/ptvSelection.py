@@ -43,7 +43,6 @@ with gzip.open(fname, 'rt') as fin:
                 _lof_filter = l[-3]
                 _lof_flags = l[-2]
                 _lof_info = l[-1]
-#                if _consequence=='stop_gained' and _canonical=='YES' and l[-1]=='' and l[-2]=='' and l[-3]=='':
                 if 'stop_gained' in _consequence and _canonical=='YES' and _lof_filter=='' and _lof_flags=='':
                     if _alt != _allele:
                         print("ALT != ALLELE:", _alt, _allele)

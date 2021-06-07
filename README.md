@@ -1,5 +1,5 @@
 # Adding context to nonsense: analysis of sequence properties at pLoF variant sites
-Source files for analysing DNA sequence properties in regions of nonsense-mutations in human CDS.
+Source files for analysing DNA sequence properties in regions of nonsense-mutations in human CDS. The descripiton of scripts and their order is available in [pipeline.md](pipeline.md)
 
 ## Table of contents
 <!--ts-->
@@ -21,7 +21,7 @@ Nonsense-mutation positions were selected from gnomAD v2.1.1 database lifted ove
 
 ![ptvs distribution](img/ptvs_distr.png) 
 
-In total, 122 101 predicted transcript variants (ptvs) were found. However, the distribution of ptvs per genes is highly uneven (see figure above), so they were filtered with no more than 2 ptvs per ENST threshold. As a results, 22 901 ptvs rest.
+In total, 122 101 predicted transcript variants (ptvs) were found. However, the distribution of ptvs per genes is highly uneven (see figure above), so they were filtered with no more than 2 ptvs per ENST (Ensemble Transcript ID) threshold. As a results, 22 901 ptvs rest.
 
 
 

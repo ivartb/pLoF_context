@@ -9,20 +9,11 @@ from scipy.stats import rankdata
 
 
 
-bs_dict = dict()
-for line in open('../cocoputs.tsv'):
-    a, b = line.split("\t")
-    bs_dict[a] = float(b)
 
 window = 30
 codons = [''.join(i) for i in product('AGTC', repeat=3)]
-context_2 = pd.read_csv("context_2_30_+_filtered2_conserv.tsv", sep="\t", header=0, index_col=0)
-#baseline_2 = pd.read_csv("baseline_2_all_+_filtered2_30.tsv", sep="\t", header=0, index_col=0)
-
-baseline_2 = pd.DataFrame(0, index=context_2.index, columns=context_2.columns)
-for r in baseline_2.index:
-    for c in baseline_2.columns:
-        baseline_2.loc[r, c] = bs_dict[r] * sum(context_2.loc[:, c]) / 1000
+context_2 = pd.read_csv("context.tsv", sep="\t", header=0, index_col=0)
+baseline_2 = pd.read_csv("baseline.tsv", sep="\t", header=0, index_col=0)
 
 
 context_2 = context_2.drop(labels=['0'], axis=1)
@@ -58,7 +49,6 @@ for d in ['-1', '1']:
     # Amino Acids
     freq = dict()
     freq2 = dict()
-    #print(tmp.loc[:, d])
     seq = tmp.loc[:, d]
     seq2 = tmp2.loc[:, d]
     for (codon, val) in seq.iteritems():
